@@ -185,10 +185,7 @@ const fetchContentfulData = async (query: string): Promise<any> => {
     }`;
   
     const res = await fetchContentfulData(query);
-    return {
-      fr: res.data.fr.items,
-      en: res.data.en.items
-    } || null;
+    return { fr: res.data.fr.items, en: res.data.en.items } || null;
   }
   
   

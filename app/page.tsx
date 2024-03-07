@@ -1,6 +1,6 @@
 import RegionMap from "./components/RegionMap";
 import { obj } from "../api/objetRegion";
-import { getAllPages, getAllRegionsId } from "@/api/contentful";
+import { getAllRegionsId } from "@/api/contentful";
 
 export default async function Home() {
   const regions = await getAllRegionsId("pFAf5IubZnVlp1WSDDHkB");
