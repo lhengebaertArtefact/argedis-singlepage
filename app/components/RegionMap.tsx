@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import Producer from "./Producer";
 import Image from "next/image";
 import arrow_left from "../../public/arrow_left.png";
+import frenchFlag from "../../public/frenchFlag.png";
+import englishFlag from "../../public/englishFlag.png";
 
 export default function RegionMap({ regions }: any) {
   const [currentLang, setCurrentLang] = useState<string>("fr");
   const [openProducer, setOpenProducer] = useState<string | null>(null);
-  const [getClassName, setGetClassName] = useState<any>(null);
   const [toggle, setToggle] = useState<any>(false);
   const [currentProducerIndex, setCurrentProducerIndex] = useState<number>(-1);
 
@@ -18,12 +19,8 @@ export default function RegionMap({ regions }: any) {
 
   // Fonction pour ouvrir ou fermer le composant Producer
   const openOrClose = (producerUid: string | null, index: number) => {
-    if (openProducer === producerUid) {
-      setOpenProducer(null);
-    } else {
-      setOpenProducer(producerUid);
-      setCurrentProducerIndex(index); // Mettre à jour l'index du producteur actuel
-    }
+    setOpenProducer(producerUid);
+    setCurrentProducerIndex(index);
     setToggle(!toggle);
   };
 
@@ -31,26 +28,15 @@ export default function RegionMap({ regions }: any) {
   const nextProducer = () => {
     setCurrentProducerIndex((prevIndex) => {
       const nextIndex = prevIndex + 1;
-      const newIndex =
-        nextIndex < currentRegion.producers.length ? nextIndex : 0;
-      setOpenProducer(currentRegion.producers[newIndex]);
-      return newIndex;
+      return nextIndex < currentRegion.producers.length ? nextIndex : 0;
     });
   };
 
-  // Fonction pour passer au fournisseur précédent
   const previousProducer = () => {
     setCurrentProducerIndex((prevIndex) => {
       const nextIndex = prevIndex - 1;
-      const newIndex =
-        nextIndex >= 0 ? nextIndex : currentRegion.producers.length - 1;
-      setOpenProducer(currentRegion.producers[newIndex]);
-      return newIndex;
+      return nextIndex >= 0 ? nextIndex : currentRegion.producers.length - 1;
     });
-  };
-
-  const returnToMap = () => {
-    setOpenProducer(null);
   };
 
   const currentRegion = regions.regions.find(
@@ -60,17 +46,31 @@ export default function RegionMap({ regions }: any) {
   useEffect(() => {}, [currentLang]);
 
   useEffect(() => {
-    setCurrentProducerIndex(-1);
+    setCurrentProducerIndex(0);
   }, [currentRegion]);
 
   return (
     <div className={toggle ? "basic" : "container"}>
-      <div className={toggle ? "producer_region" : undefined}> </div>
+      {toggle ? (
+        <img
+          src={currentRegion.smallMap}
+          className="img_smallmap"
+          alt="small map of a region"
+        />
+      ) : undefined}
 
       <button className="language-toggle" onClick={toggleLanguage}>
-        {currentLang === "fr"
-          ? regions.regions[0].englishVersionButton
-          : regions.regions[1].frenchVersionButton}
+        {currentLang === "fr" ? (
+          <div className="toggle_flags">
+            <img className="img_flags" src={englishFlag.src} alt="" />
+            version anglaise
+          </div>
+        ) : (
+          <div className="toggle_flags">
+            <img className="img_flags" src={frenchFlag.src} alt="" />
+            french version
+          </div>
+        )}
       </button>
 
       {currentRegion && (
@@ -81,7 +81,11 @@ export default function RegionMap({ regions }: any) {
                 <div>
                   <div className="back_map">
                     <div className="arrow_left_wrapper">
-                      <img src={arrow_left.src} alt="arrow left" />
+                      <img
+                        src={arrow_left.src}
+                        className="arrow_left"
+                        alt="arrow left"
+                      />
                     </div>
                     <button
                       className="back_map_button"
@@ -94,17 +98,31 @@ export default function RegionMap({ regions }: any) {
 
                   <Producer
                     producer={currentRegion.producers[currentProducerIndex]}
+                    previousProducer={
+                      currentProducerIndex > 0
+                        ? currentRegion.producers[currentProducerIndex - 1]
+                        : currentRegion.producers[
+                            currentRegion.producers.length - 1
+                          ]
+                    }
+                    nextProducer={
+                      currentProducerIndex < currentRegion.producers.length - 1
+                        ? currentRegion.producers[currentProducerIndex + 1]
+                        : currentRegion.producers[0]
+                    }
                     region={currentRegion}
                     onNextSupplier={nextProducer}
                     onPreviousSupplier={previousProducer}
                     onCloseOrOpen={openOrClose}
-                    langage={currentLang}
                   />
                 </div>
               ) : (
                 <div>
-                  <h1 className="title">{currentRegion.title}</h1>
-                  <p className="subtitle">{currentRegion.subtitle}</p>
+                  <div className="titles_homepage">
+                    <h1 className="title">{currentRegion.title}</h1>
+                    <p className="subtitle">{currentRegion.subtitle}</p>
+                  </div>
+
                   {currentRegion.producers.map(
                     (producer: any, index: number) => (
                       <button

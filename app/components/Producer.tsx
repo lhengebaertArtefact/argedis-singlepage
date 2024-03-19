@@ -1,13 +1,17 @@
 "use client";
-import React from "react";
-import Image from "next/image";
+import React, { useEffect } from "react";
+import fond from "@/public/fond.png";
+import arrow_left from "../../public/arrow_left.png";
+import chevron_left from "../../public/chevron_left.png";
+import arrow_right from "../../public/arrow_right.png";
 
 function Producer({
   producer,
   region,
   onNextSupplier,
   onPreviousSupplier,
-  langage,
+  previousProducer,
+  nextProducer,
 }: any) {
   return (
     <div className="producer_container">
@@ -20,9 +24,14 @@ function Producer({
         {producer.products.map((product: any, index: number) => (
           <li key={index}>
             <img
+              className="product_photo_background"
+              src={fond.src}
+              alt="bubble white for products"
+            />
+            <img
               className="product_photo"
               src={product.photo}
-              alt={product.name}
+              alt={product.photo}
             />
           </li>
         ))}
@@ -35,11 +44,31 @@ function Producer({
       <div className="producer-buttons-container">
         <button className="next_prev_buttons" onClick={onPreviousSupplier}>
           {" "}
+          <img
+            src={chevron_left.src}
+            alt="arrow left"
+            className="arrow_prev_producer"
+          />
           {region.previousSupplierButton}
+          <img
+            className="photo_prev_producer"
+            src={previousProducer.photo}
+            alt={producer.name}
+          />
         </button>
         <button className="next_prev_buttons" onClick={onNextSupplier}>
           {" "}
+          <img
+            className="photo_next_producer"
+            src={nextProducer.photo}
+            alt={producer.name}
+          />
           {region.nextSupplierButton}
+          <img
+            src={arrow_right.src}
+            className="arrow_next_producer"
+            alt="arrow right"
+          />
         </button>
       </div>
     </div>

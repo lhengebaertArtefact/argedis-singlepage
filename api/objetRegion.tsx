@@ -1,7 +1,7 @@
 import accueil_map from "../public/accueil_map.png";
 import bg from "../public/bg.png";
 import map_big from "../public/map_big.png";
-import map_small from "../public/map_small.png";
+import map_small from "../public/small_map.png";
 import img_produit_1 from "../public/img_produit_1.png";
 import img_produit_2 from "../public/img_produit_2.png";
 import img_produit_3 from "../public/img_produit_3.png";
@@ -15,12 +15,13 @@ export const obj: any = {
       uid: "bretagne",
       name: "Bretagne",
       lang: "fr", // text commun ou en dur
-      title: "Découvrez le savoir faire de nos fournisseurs locaux",
+      title: "Découvrez le savoir faire de nos fournisseurs locaux !",
       subtitle: "Cliquez sur le fournisseur de votre choix",
       map: "URL de l'image de la carte de la Bretagne",
       backgroundMap: accueil_map.src,
       totalLogo: "URL de l'image du logo Total/énergie", // text commun ou en dur
       englishVersionButton: "Version anglaise", // text commun ou en dur
+      smallMap: map_small.src,
       producers: [
         {
           uid: "producer1",
@@ -125,7 +126,6 @@ export const obj: any = {
       returnToMapButton: "Retourner à la carte", // text commun ou en dur
     },
 
-    ///// English version
     {
       uid: "bretagne",
       name: "Brittany",
@@ -136,6 +136,7 @@ export const obj: any = {
       backgroundMap: accueil_map.src,
       totalLogo: "URL of Total/Energy logo image",
       frenchVersionButton: "french version",
+      smallMap: map_small.src,
       producers: [
         {
           uid: "producer1",
