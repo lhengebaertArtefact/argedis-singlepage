@@ -5,6 +5,8 @@ import Image from "next/image";
 import arrow_left from "../../public/arrow_left.png";
 import frenchFlag from "../../public/frenchFlag.png";
 import englishFlag from "../../public/englishFlag.png";
+import map_big from "../../public/map_big.png";
+import { motion } from "framer-motion";
 
 export default function RegionMap({ regions }: any) {
   const [currentLang, setCurrentLang] = useState<string>("fr");
@@ -50,20 +52,29 @@ export default function RegionMap({ regions }: any) {
   }, [currentRegion]);
 
   return (
-    <div
-      className={
-        toggle
-          ? "bg-custom-bg bg-cover bg-center max-w-full h-screen"
-          : "bg-custom-map bg-cover bg-center max-w-full h-screen"
-      }
-    >
-      {toggle ? (
-        <img
-          src={currentRegion.smallMap}
-          className="absolute top-[206px] left-[282px]"
-          alt="small map of a region"
-        />
-      ) : undefined}
+    <div className={"bg-custom-bg bg-cover bg-center max-w-full h-screen "}>
+      <motion.div
+        className="absolute top-[506px]"
+        initial={{ scale: 1, y: 0, opacity: 1 }}
+        animate={{
+          scale: toggle ? 0.5 : 1, // Rétrécir la carte lorsque toggle est true
+          y: toggle ? -700 : 0, // Déplacer vers le haut jusqu'à -700 lorsque toggle est true
+          // Disparaître lorsque toggle est true
+        }}
+        transition={{ duration: 0.2 }} // Durée de la transition
+      >
+        <img src={map_big.src} alt="big map of a region" />
+      </motion.div>
+      {toggle && (
+        <motion.div
+          className="absolute top-[-198px] z-[5]" // Position de départ de la petite carte
+          initial={{ opacity: 0, scale: 0.5 }} // Départ avec une opacité de 0
+          animate={{ opacity: 1 }} // Apparaître avec une opacité de 1
+          transition={{ delay: 0.1 }} // Décalage pour démarrer après la transition de la grande carte
+        >
+          <img src={map_big.src} alt="small map of a region" />
+        </motion.div>
+      )}
 
       <button
         className="absolute top-[84px] right-[48px] z-2 bg-white rounded-full px-6 py-5 text-xl"
@@ -88,7 +99,7 @@ export default function RegionMap({ regions }: any) {
             <li key={currentProducerIndex}>
               {openProducer ? (
                 <div>
-                  <div className="absolute top-[84px] left-[48px] flex">
+                  <div className="absolute top-[84px] left-[48px] flex z-[10]">
                     <div className="rounded-full bg-[#D4673D] w-[82px] h-[82px] flex justify-center items-center mr-[25px]">
                       <img
                         src={arrow_left.src}
@@ -107,24 +118,38 @@ export default function RegionMap({ regions }: any) {
                     </button>
                   </div>
 
-                  <Producer
-                    producer={currentRegion.producers[currentProducerIndex]}
-                    previousProducer={
-                      currentProducerIndex > 0
-                        ? currentRegion.producers[currentProducerIndex - 1]
-                        : currentRegion.producers[
-                            currentRegion.producers.length - 1
-                          ]
-                    }
-                    nextProducer={
-                      currentProducerIndex < currentRegion.producers.length - 1
-                        ? currentRegion.producers[currentProducerIndex + 1]
-                        : currentRegion.producers[0]
-                    }
-                    region={currentRegion}
-                    onNextSupplier={nextProducer}
-                    onPreviousSupplier={previousProducer}
-                  />
+                  <motion.div
+                    initial={{ y: "100vh", opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                    }}
+                  >
+                    <Producer
+                      producer={currentRegion.producers[currentProducerIndex]}
+                      previousProducer={
+                        currentProducerIndex > 0
+                          ? currentRegion.producers[currentProducerIndex - 1]
+                          : currentRegion.producers[
+                              currentRegion.producers.length - 1
+                            ]
+                      }
+                      nextProducer={
+                        currentProducerIndex <
+                        currentRegion.producers.length - 1
+                          ? currentRegion.producers[currentProducerIndex + 1]
+                          : currentRegion.producers[0]
+                      }
+                      region={currentRegion}
+                      onNextSupplier={nextProducer}
+                      onPreviousSupplier={previousProducer}
+                    />
+                    <div style={{ height: "100vh" }}></div>
+                  </motion.div>
                 </div>
               ) : (
                 <div>
