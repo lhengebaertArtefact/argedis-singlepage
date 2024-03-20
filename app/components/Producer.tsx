@@ -14,61 +14,53 @@ function Producer({
   nextProducer,
 }: any) {
   return (
-    <div className="producer_container">
+    <div className="absolute z-1 rounded-[40px] bg-white top-[834px] left-[48px] right-[48px] px-[68px] pt-[126px] px-[68px] py-[68px] z-[1]">
       <img
-        className="photo_producer_description"
+        className="absolute top-[-205px] left-[20px] w-[289px]"
         src={producer.photo}
         alt={producer.name}
       />
-      <ul className="list_products">
+      <ul className="absolute top-[-138px] right-[81px] flex">
         {producer.products.map((product: any, index: number) => (
           <li key={index}>
             <img
-              className="product_photo_background"
+              className="absolute top-[84px] z-[-1]"
               src={fond.src}
               alt="bubble white for products"
             />
-            <img
-              className="product_photo"
-              src={product.photo}
-              alt={product.photo}
-            />
+            <img src={product.photo} alt={product.photo} />
           </li>
         ))}
       </ul>
-      <div className="producer_description_container">
-        <p className="title_store">{producer.name}</p>
-        <p className="producer_description">{producer.description}</p>
+      <div>
+        <p className="text-[40px] text-[#007AA3] mb-[64px]">{producer.name}</p>
+        <p className="text-[28px]">{producer.description}</p>
       </div>
 
-      <div className="producer-buttons-container">
-        <button className="next_prev_buttons" onClick={onPreviousSupplier}>
-          {" "}
-          <img
-            src={chevron_left.src}
-            alt="arrow left"
-            className="arrow_prev_producer"
-          />
+      <div className="fixed bottom-0 left-[48px] right-[48px] flex  mb-[110px] justify-between items-center text-white">
+        <button
+          className="flex justify-between items-center rounded-[40px] bg-[#D4673D] h-[116px] text-[28px] px-[32px]"
+          onClick={onPreviousSupplier}
+        >
+          <img src={chevron_left.src} alt="arrow left" className="mr-[43px]" />
           {region.previousSupplierButton}
           <img
-            className="photo_prev_producer"
+            className="w-[51px] ml-[24px]"
             src={previousProducer.photo}
             alt={producer.name}
           />
         </button>
-        <button className="next_prev_buttons" onClick={onNextSupplier}>
-          {" "}
+        <button
+          className="flex justify-between items-center rounded-[40px] bg-[#D4673D] h-[116px] text-[28px] px-[32px]"
+          onClick={onNextSupplier}
+        >
           <img
-            className="photo_next_producer"
+            className="w-[51px] mr-[24px]"
             src={nextProducer.photo}
             alt={producer.name}
           />
           {region.nextSupplierButton}
-          <img
-            src={arrow_right.src}
-            className="arrow_next_producer"
-            alt="arrow right"
-          />
+          <img src={arrow_right.src} className="ml-[43px]" alt="arrow right" />
         </button>
       </div>
     </div>

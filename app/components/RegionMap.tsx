@@ -50,24 +50,33 @@ export default function RegionMap({ regions }: any) {
   }, [currentRegion]);
 
   return (
-    <div className={toggle ? "basic" : "container"}>
+    <div
+      className={
+        toggle
+          ? "bg-custom-bg bg-cover bg-center max-w-full h-screen"
+          : "bg-custom-map bg-cover bg-center max-w-full h-screen"
+      }
+    >
       {toggle ? (
         <img
           src={currentRegion.smallMap}
-          className="img_smallmap"
+          className="absolute top-[206px] left-[282px]"
           alt="small map of a region"
         />
       ) : undefined}
 
-      <button className="language-toggle" onClick={toggleLanguage}>
+      <button
+        className="absolute top-[84px] right-[48px] z-2 bg-white rounded-full px-6 py-5 text-xl"
+        onClick={toggleLanguage}
+      >
         {currentLang === "fr" ? (
-          <div className="toggle_flags">
-            <img className="img_flags" src={englishFlag.src} alt="" />
+          <div className="flex items-center">
+            <img className="mr-4" src={englishFlag.src} alt="" />
             version anglaise
           </div>
         ) : (
-          <div className="toggle_flags">
-            <img className="img_flags" src={frenchFlag.src} alt="" />
+          <div className="flex items-center">
+            <img className="mr-4" src={frenchFlag.src} alt="" />
             french version
           </div>
         )}
@@ -79,20 +88,22 @@ export default function RegionMap({ regions }: any) {
             <li key={currentProducerIndex}>
               {openProducer ? (
                 <div>
-                  <div className="back_map">
-                    <div className="arrow_left_wrapper">
+                  <div className="absolute top-[84px] left-[48px] flex">
+                    <div className="rounded-full bg-[#D4673D] w-[82px] h-[82px] flex justify-center items-center mr-[25px]">
                       <img
                         src={arrow_left.src}
-                        className="arrow_left"
+                        className="h-[42px]"
                         alt="arrow left"
+                        onClick={() => openOrClose(null, 0)}
                       />
                     </div>
                     <button
-                      className="back_map_button"
+                      className="text-white text-[36px]"
                       onClick={() => openOrClose(null, 0)}
                     >
-                      {" "}
-                      {currentRegion.returnToMapButton}
+                      {currentLang === "fr"
+                        ? "revenir à la carte"
+                        : "return to map"}
                     </button>
                   </div>
 
@@ -113,21 +124,28 @@ export default function RegionMap({ regions }: any) {
                     region={currentRegion}
                     onNextSupplier={nextProducer}
                     onPreviousSupplier={previousProducer}
-                    onCloseOrOpen={openOrClose}
                   />
                 </div>
               ) : (
                 <div>
-                  <div className="titles_homepage">
-                    <h1 className="title">{currentRegion.title}</h1>
-                    <p className="subtitle">{currentRegion.subtitle}</p>
+                  <div className="absolute top-[232px] pl-[155px] pr-[155px] left-0 right-0">
+                    <h1 className="text-white text-center text-5xl mb-8">
+                      {currentLang === "fr"
+                        ? "Découvrez le savoir faire de nos fournisseurs locaux !"
+                        : "Discover Brittany"}
+                    </h1>
+                    <p className="text-white text-center text-3xl">
+                      {currentLang === "fr"
+                        ? "Cliquez sur le fournisseur de votre choix"
+                        : "Explore local producers in Brittany"}
+                    </p>
                   </div>
 
                   {currentRegion.producers.map(
                     (producer: any, index: number) => (
                       <button
                         key={index}
-                        className="producer-button"
+                        className="absolute w-[300px] h-[50px] border-none rounded-full "
                         style={{
                           top: producer.coordinates.y,
                           left: producer.coordinates.x,
@@ -135,7 +153,7 @@ export default function RegionMap({ regions }: any) {
                         onClick={() => openOrClose(producer.uid, index)}
                       >
                         <img
-                          className="photo_producer"
+                          className="absolute w-[144px]"
                           src={producer.photo}
                           alt={producer.name}
                         />
