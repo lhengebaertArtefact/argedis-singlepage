@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import Producer from "./Producer";
-import Image from "next/image";
 import arrow_left from "../../public/arrow_left.png";
 import frenchFlag from "../../public/frenchFlag.png";
 import englishFlag from "../../public/englishFlag.png";
@@ -13,6 +12,11 @@ export default function RegionMap({ regions }: any) {
   const [openProducer, setOpenProducer] = useState<string | null>(null);
   const [toggle, setToggle] = useState<any>(false);
   const [currentProducerIndex, setCurrentProducerIndex] = useState<number>(-1);
+  const [imageError, setImageError] = useState<boolean>(false);
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
 
   // Fonction pour basculer entre le français et l'anglais
   const toggleLanguage = () => {
@@ -57,37 +61,70 @@ export default function RegionMap({ regions }: any) {
         className="absolute top-[506px]"
         initial={{ scale: 1, y: 0, opacity: 1 }}
         animate={{
-          scale: toggle ? 0.5 : 1, // Rétrécir la carte lorsque toggle est true
-          y: toggle ? -700 : 0, // Déplacer vers le haut jusqu'à -700 lorsque toggle est true
-          // Disparaître lorsque toggle est true
+          scale: toggle ? 0.5 : 1,
+          y: toggle ? -700 : 0,
         }}
-        transition={{ duration: 0.2 }} // Durée de la transition
+        transition={{ duration: 0.2 }}
       >
-        <img src={map_big.src} alt="big map of a region" />
+        {imageError ? (
+          <div className="w-full h-full bg-white"></div>
+        ) : (
+          <img
+            src={map_big.src}
+            alt="big map of a region"
+            onError={handleImageError}
+          />
+        )}
       </motion.div>
       {toggle && (
         <motion.div
-          className="absolute top-[-198px] z-[5]" // Position de départ de la petite carte
-          initial={{ opacity: 0, scale: 0.5 }} // Départ avec une opacité de 0
-          animate={{ opacity: 1 }} // Apparaître avec une opacité de 1
-          transition={{ delay: 0.1 }} // Décalage pour démarrer après la transition de la grande carte
+          className="absolute top-[-198px] z-[5]"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1 }}
         >
-          <img src={map_big.src} alt="small map of a region" />
+          {imageError ? (
+            <div className="w-full h-full bg-white"></div>
+          ) : (
+            <img
+              src={map_big.src}
+              alt="small map of a region"
+              onError={handleImageError}
+            />
+          )}
         </motion.div>
       )}
 
       <button
-        className="absolute top-[84px] right-[48px] z-2 bg-white rounded-full px-6 py-5 text-xl"
+        className="absolute top-[84px] right-[48px] z-2 bg-white rounded-full px-6 py-5 text-xl z-[5]"
         onClick={toggleLanguage}
       >
         {currentLang === "fr" ? (
           <div className="flex items-center">
-            <img className="mr-4" src={englishFlag.src} alt="" />
+            {imageError ? (
+              <div className="w-full h-full bg-white"></div>
+            ) : (
+              <img
+                className="mr-4"
+                src={englishFlag.src}
+                alt=""
+                onError={handleImageError}
+              />
+            )}
             version anglaise
           </div>
         ) : (
           <div className="flex items-center">
-            <img className="mr-4" src={frenchFlag.src} alt="" />
+            {imageError ? (
+              <div className="w-full h-full bg-white"></div>
+            ) : (
+              <img
+                className="mr-4"
+                src={frenchFlag.src}
+                alt=""
+                onError={handleImageError}
+              />
+            )}
             french version
           </div>
         )}
@@ -101,12 +138,17 @@ export default function RegionMap({ regions }: any) {
                 <div>
                   <div className="absolute top-[84px] left-[48px] flex z-[10]">
                     <div className="rounded-full bg-[#D4673D] w-[82px] h-[82px] flex justify-center items-center mr-[25px]">
-                      <img
-                        src={arrow_left.src}
-                        className="h-[42px]"
-                        alt="arrow left"
-                        onClick={() => openOrClose(null, 0)}
-                      />
+                      {imageError ? (
+                        <div className="w-full h-full bg-white"></div>
+                      ) : (
+                        <img
+                          src={arrow_left.src}
+                          className="h-[42px]"
+                          alt="arrow left"
+                          onClick={() => openOrClose(null, 0)}
+                          onError={handleImageError}
+                        />
+                      )}
                     </div>
                     <button
                       className="text-white text-[36px]"
@@ -147,6 +189,8 @@ export default function RegionMap({ regions }: any) {
                       region={currentRegion}
                       onNextSupplier={nextProducer}
                       onPreviousSupplier={previousProducer}
+                      onError={handleImageError}
+                      imageError={imageError}
                     />
                     <div style={{ height: "100vh" }}></div>
                   </motion.div>
@@ -177,11 +221,16 @@ export default function RegionMap({ regions }: any) {
                         }}
                         onClick={() => openOrClose(producer.uid, index)}
                       >
-                        <img
-                          className="absolute w-[144px]"
-                          src={producer.photo}
-                          alt={producer.name}
-                        />
+                        {imageError ? (
+                          <div className="w-full h-full bg-white"></div>
+                        ) : (
+                          <img
+                            className="absolute w-[144px]"
+                            src={producer.photo}
+                            alt={producer.name}
+                            onError={handleImageError}
+                          />
+                        )}
                       </button>
                     )
                   )}
