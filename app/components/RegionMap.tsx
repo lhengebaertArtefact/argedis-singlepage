@@ -69,11 +69,13 @@ export default function RegionMap({ regions }: any) {
         {imageError ? (
           <div className="w-full h-full bg-white"></div>
         ) : (
-          <img
-            src={map_big.src}
-            alt="big map of a region"
-            onError={handleImageError}
-          />
+          <div>
+            <img
+              src={map_big.src}
+              alt="big map of a region"
+              onError={handleImageError}
+            />
+          </div>
         )}
       </motion.div>
       {toggle && (
@@ -81,7 +83,7 @@ export default function RegionMap({ regions }: any) {
           className="absolute top-[-198px] z-[5]"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: 0.3 }}
         >
           {imageError ? (
             <div className="w-full h-full bg-white"></div>
@@ -224,12 +226,24 @@ export default function RegionMap({ regions }: any) {
                         {imageError ? (
                           <div className="w-full h-full bg-white"></div>
                         ) : (
-                          <img
-                            className="absolute w-[144px]"
-                            src={producer.photo}
-                            alt={producer.name}
-                            onError={handleImageError}
-                          />
+                          <div className="relative">
+                            <img
+                              className="absolute w-[144px] top-[5px] z-[5]"
+                              src={producer.photo}
+                              alt={producer.name}
+                              onError={handleImageError}
+                            />
+                            <motion.div
+                              className="absolute top-0 left-0 w-[144px] h-[144px] border-[20px] border-white border-solid border-opacity-50 rounded-full"
+                              initial={{ scale: 1 }}
+                              animate={{
+                                scale: [1, 1.3, 1],
+                              }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                            >
+                              {" "}
+                            </motion.div>
+                          </div>
                         )}
                       </button>
                     )
@@ -243,6 +257,13 @@ export default function RegionMap({ regions }: any) {
     </div>
   );
 }
+
+//   <motion.div
+//   className="absolute top-0 left-0 w-[144px] h-[144px] rounded-full border-white border-solid border-opacity-50"
+//   initial={{ scale: 1 }}
+//   animate={{ scale: [1, 1.1, 1] }}
+//   transition={{ duration: 2, repeat: Infinity }}
+// ></motion.div>;
 
 // "use client";
 
