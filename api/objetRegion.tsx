@@ -8,6 +8,7 @@ import img_produit_3 from "../public/img_produit_3.png";
 import grande_photo_du_fournisseur from "../public/grande_photo_du_fournisseur.png";
 import fournisseur2 from "../public/fournisseur2.png";
 import fournisseur3 from "../public/fournisseur3.png";
+import distance_f1 from "../public/distance_f1.png";
 
 export const obj: any = {
   regions: [
@@ -47,8 +48,8 @@ export const obj: any = {
           title: "...",
           description:
             "Le Fromager Breton est spécialisé dans les fromages traditionnels bretons fabriqués à partir d'ingrédients locaux.",
-          distance: "3,5 km de la station-service",
-          map: "../public/map_small.png",
+          distance: distance_f1.src,
+          map: distance_f1.src,
         },
         {
           uid: "producer2",
@@ -77,9 +78,9 @@ export const obj: any = {
           ],
           title: "...",
           description:
-            "La Brasserie Bretonne propose une sélection de bières artisanales et de cidres traditionnels bretons.",
-          distance: "5 km de la station-service",
-          map: "../public/map_small.png",
+            "La Brasserie Bretonne propose une sélection de bières artisanales et de cidres traditionnels bretons.La Brasserie Bretonne propose une sélection de bières artisanales et de cidres traditionnels bretons.La Brasserie Bretonne propose une sélection de bières artisanales et de cidres traditionnels bretons.La Brasserie Bretonne propose une sélection de bières artisanales et de cidres traditionnels bretons.La Brasserie Bretonne propose une sélection de bières artisanales et de cidres traditionnels bretons.La Brasserie Bretonne propose une sélection de bières artisanales et de cidres traditionnels bretons. La Brasserie Bretonne propose une sélection de bières artisanales et de cidres traditionnels bretons.La Brasserie Bretonne propose une sélection de bières artisanales et de cidres traditionnels bretons.La Brasserie Bretonne propose une sélection de bières artisanales et de cidres traditionnels bretons.La Brasserie Bretonne propose une sélection de bières artisanales et de cidres traditionnels bretons.La Brasserie Bretonne propose une sélection de bières artisanales et de cidres traditionnels bretons.",
+          distance: distance_f1.src,
+          map: map_big.src,
         },
         {
           uid: "producer3",
@@ -109,8 +110,8 @@ export const obj: any = {
           title: "...",
           description:
             "La Crêperie Bretonne propose une variété de crêpes et de galettes préparées selon les recettes traditionnelles bretonnes.",
-          distance: "2 km de la station-service",
-          map: "../public/map_small.png",
+          distance: distance_f1.src,
+          map: map_big.src,
         },
 
         // Autres producteurs à rajouter
@@ -158,8 +159,8 @@ export const obj: any = {
           title: "...",
           description:
             "The Breton Cheese Maker specializes in traditional Breton cheeses made from local ingredients.",
-          distance: "3.5 km from the gas station",
-          map: "../public/map_small.png",
+          distance: distance_f1.src,
+          map: map_big.src,
         },
         {
           uid: "producer2",
@@ -189,8 +190,8 @@ export const obj: any = {
           title: "...",
           description:
             "The Breton Brewery offers a selection of artisanal beers and traditional Breton ciders.",
-          distance: "5 km from the gas station",
-          map: "../public/map_small.png",
+          distance: distance_f1.src,
+          map: map_big.src,
         },
         {
           uid: "producer3",
@@ -220,8 +221,8 @@ export const obj: any = {
           title: "...",
           description:
             "The Breton Crêperie offers a variety of crêpes and galettes prepared according to traditional Breton recipes.",
-          distance: "2 km from the gas station",
-          map: "../public/map_small.png",
+          distance: distance_f1.src,
+          map: map_big.src,
         },
 
         // Other producers à rajouter

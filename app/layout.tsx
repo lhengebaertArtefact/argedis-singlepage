@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
 import { useEffect } from "react";
+import local from "next/font/local";
+import localFont from "next/font/local";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +18,11 @@ export const viewport: Viewport = {
   themeColor: "#FFFFFF",
   width: 800,
 };
+
+const nexa = localFont({
+  src: "../public/fonts/nexa/Nexa-Heavy.ttf",
+  variable: "--font-nexa",
+});
 
 export default function RootLayout({
   children,
@@ -31,7 +38,7 @@ export default function RootLayout({
         />
       </Head>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={`${nexa.variable} inter.className`}>{children}</body>
       </html>
     </>
   );

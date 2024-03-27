@@ -4,6 +4,8 @@ import fond from "@/public/fond.png";
 import arrow_left from "../../public/arrow_left.png";
 import chevron_left from "../../public/chevron_left.png";
 import arrow_right from "../../public/arrow_right.png";
+import gif_main from "../../public/gif_main.gif";
+import { motion } from "framer-motion";
 
 function Producer({
   producer,
@@ -14,6 +16,7 @@ function Producer({
   nextProducer,
   onError,
   imageError,
+  showProducer,
 }: any) {
   return (
     <div className="absolute z-1 rounded-[40px] bg-white top-[834px] left-[48px] right-[48px] px-[68px] pt-[126px] px-[68px] py-[68px] z-[1]">
@@ -21,13 +24,13 @@ function Producer({
         <div className="w-full h-full bg-white"></div>
       ) : (
         <img
-          className="absolute top-[-205px] left-[20px] w-[289px]"
+          className="fixed top-[655px] left-[68px] w-[289px]"
           src={producer.photo}
           alt={producer.name}
           onError={onError}
         />
       )}
-      <ul className="absolute top-[-138px] right-[81px] flex">
+      <ul className="fixed top-[700px] right-[121px] flex">
         {producer.products.map((product: any, index: number) => (
           <li key={index}>
             {imageError ? (
@@ -48,12 +51,25 @@ function Producer({
           </li>
         ))}
       </ul>
-      <div>
+      <div className="max-h-[500px] overflow-y-auto">
         <p className="text-[40px] text-[#007AA3] mb-[64px]">{producer.name}</p>
-        <p className="text-[28px]">{producer.description}</p>
+        <p className="text-[28px] ">{producer.description}</p>
       </div>
 
       <div className="fixed bottom-0 left-[48px] right-[48px] flex  mb-[110px] justify-between items-center text-white">
+        <motion.img
+          src={producer.distance}
+          alt="logo total"
+          className="fixed top-[380px] left-[450px] w-[80px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: "easeIn" }}
+        />
+        <img
+          src={gif_main.src}
+          alt="hand to click"
+          className="absolute transform -rotate-23 right-8 top-8"
+        />
         <button
           className="flex justify-between items-center rounded-[40px] bg-[#D4673D] h-[116px] text-[28px] px-[32px]"
           onClick={onPreviousSupplier}

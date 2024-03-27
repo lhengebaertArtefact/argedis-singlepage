@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { fontFamily } from "./app/fonts-typo/fonts-typo";
 
 const config: Config = {
   content: [
@@ -12,6 +13,10 @@ const config: Config = {
         'custom-map': "url('../public/accueil_map.png')",
         'custom-bg': "url('../public/bg.png')",
       },
+      rotate: {
+        '23': '23deg',
+      },
+      fontFamily: { "Nexa-ExtraLight": "--font-nexa" }
     },
   },
   plugins: [],
