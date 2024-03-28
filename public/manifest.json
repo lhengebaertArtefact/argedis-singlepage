@@ -1,5 +1,5 @@
 {
-    "id": "4",
+    "id": "10",
     "name": "My awesome PWA app",
     "short_name": "PWA App",
     "description": "this is an next app compatible with PWA",
@@ -23,7 +23,7 @@
     ],
     "theme_color": "#FFFFFF",
     "background_color": "#FFFFFF",
-    "start_url": "/hello",
+    "start_url": "/",
     "display": "standalone",
     "orientation": "portrait"
   }
