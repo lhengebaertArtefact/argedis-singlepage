@@ -2,14 +2,21 @@ import RegionMap from "../components/RegionMap";
 import { obj } from "@/api/objetRegion";
 
 export async function generateStaticParams() {
-  const staticParams: any[] = [];
-  const regions = obj;
+  const staticParams = [];
 
-  for (const region of regions) {
-    const { uid } = region;
+  // Itérer sur les régions
+  for (const region of obj.regions) {
+    const regionParams = { region: region.uid };
 
-    staticParams.push({ region: uid });
+    // Itérer sur les producteurs de la région
+    for (const producer of region.producers) {
+      const producerParams = { region: region.uid, producer: producer.uid };
+      staticParams.push(producerParams);
+    }
+
+    staticParams.push(regionParams);
   }
+
   return staticParams;
 }
 
