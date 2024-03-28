@@ -8,8 +8,9 @@ import map_big from "../../public/map_big.png";
 import logoTotal from "../../public/logoTotal.png";
 import { motion } from "framer-motion";
 import { animate } from "popmotion";
+import Lottie from "react-lottie";
 
-export default function RegionMap({ regions }: any) {
+export default function RegionMap({ region }: any) {
   const [currentLang, setCurrentLang] = useState<string>("fr");
   const [openProducer, setOpenProducer] = useState<string | null>(null);
   const [toggle, setToggle] = useState<any>(false);
@@ -51,7 +52,7 @@ export default function RegionMap({ regions }: any) {
     setShowProducer(true);
   };
 
-  const currentRegion = regions.regions.find(
+  const currentRegion = region.find(
     (region: any) => region.lang === currentLang
   );
 
@@ -61,27 +62,36 @@ export default function RegionMap({ regions }: any) {
     setCurrentProducerIndex(0);
   }, [currentRegion, showProducer]);
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: currentRegion.bigMap, // Chargement de l'animation depuis le fichier JSON
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   return (
-    <div className={"bg-custom-bg bg-cover bg-center max-w-full h-screen "}>
+    <div
+      className={" bg-cover bg-center max-w-full h-screen"}
+      style={{ backgroundImage: `url(${currentRegion.backgroundMap})` }}
+    >
       <motion.div
-        className="absolute top-[506px]"
+        className="absolute top-[0px]"
         initial={{ scale: 1, y: 0, opacity: 1 }}
         animate={{
-          scale: toggle ? 0.5 : 1,
-          y: toggle ? -700 : 0,
+          scale: toggle ? 0.63 : 1,
+          y: toggle ? -595 : 0,
+          x: toggle ? -15 : 0,
           opacity: toggle ? 0 : 1,
         }}
-        transition={{ duration: 0.2, opacity: toggle ? { delay: 0.4 } : 1 }}
+        transition={{ duration: 0.2, opacity: toggle ? { delay: 0.3 } : 1 }}
       >
         {imageError ? (
           <div className="w-full h-full bg-white"></div>
         ) : (
           <div>
-            <img
-              src={map_big.src}
-              alt="big map of a region"
-              onError={handleImageError}
-            />
+            <Lottie options={defaultOptions} />
           </div>
         )}
       </motion.div>
@@ -90,21 +100,17 @@ export default function RegionMap({ regions }: any) {
           className="absolute top-[-195px]"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.2 }}
         >
           {imageError ? (
             <div className="w-full h-full bg-white"></div>
           ) : (
             <div>
               <img
-                src={map_big.src}
+                src={currentRegion.producers[currentProducerIndex].map}
                 alt="small map of a region"
+                className="scale-[2] mt-[200px]"
                 onError={handleImageError}
-              />
-              <img
-                src={logoTotal.src}
-                alt="logo total"
-                className="absolute top-[600px] left-[600px] w-[100px]"
               />
             </div>
           )}
@@ -116,7 +122,7 @@ export default function RegionMap({ regions }: any) {
         onClick={toggleLanguage}
       >
         {currentLang === "fr" ? (
-          <div className="flex items-center">
+          <div className="flex items-center font-nexaBold">
             {imageError ? (
               <div className="w-full h-full bg-white"></div>
             ) : (
@@ -127,10 +133,10 @@ export default function RegionMap({ regions }: any) {
                 onError={handleImageError}
               />
             )}
-            version anglaise
+            Version anglaise
           </div>
         ) : (
-          <div className="flex items-center">
+          <div className="flex items-center font-nexaBold">
             {imageError ? (
               <div className="w-full h-full bg-white"></div>
             ) : (
@@ -141,7 +147,7 @@ export default function RegionMap({ regions }: any) {
                 onError={handleImageError}
               />
             )}
-            french version
+            French version
           </div>
         )}
       </button>
@@ -169,11 +175,11 @@ export default function RegionMap({ regions }: any) {
                       )}
                     </div>
                     <button
-                      className="text-white text-[36px]"
+                      className="text-white text-[36px] font-nexaBold"
                       onClick={() => openOrClose(null, 0)}
                     >
                       {currentLang === "fr"
-                        ? "Revenir à la carte"
+                        ? "Retourner à la carte"
                         : "Return to map"}
                     </button>
                   </div>
@@ -223,12 +229,12 @@ export default function RegionMap({ regions }: any) {
               ) : (
                 <div>
                   <div className="absolute top-[232px] pl-[155px] pr-[155px] left-0 right-0">
-                    <h1 className="text-white text-center text-5xl mb-8 text-Nexa-ExtraLight font-Nexa-ExtraLight">
+                    <h1 className="text-white text-center text-5xl mb-8  font-nexaBold">
                       {currentLang === "fr"
                         ? "Découvrez le savoir faire de nos fournisseurs locaux !"
                         : "Discover Brittany"}
                     </h1>
-                    <p className="text-white text-center text-3xl">
+                    <p className="text-white text-center text-3xl font-nexa">
                       {currentLang === "fr"
                         ? "Cliquez sur le fournisseur de votre choix"
                         : "Explore local producers in Brittany"}
@@ -295,7 +301,7 @@ export default function RegionMap({ regions }: any) {
 // import { useEffect, useState } from "react";
 // import Producer from "./Producer";
 
-// function RegionMap({ regions }: any) {
+// function RegionMap({  }: any) {
 //   const [currentLang, setCurrentLang] = useState<string>("fr");
 //   const [openProducer, setOpenProducer] = useState<any>(null);
 

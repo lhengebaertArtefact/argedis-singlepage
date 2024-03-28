@@ -5,6 +5,8 @@ import Head from "next/head";
 import { useEffect } from "react";
 import local from "next/font/local";
 import localFont from "next/font/local";
+import { Nexa, NexaBold } from "./utils/customFonts";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +20,6 @@ export const viewport: Viewport = {
   themeColor: "#FFFFFF",
   width: 800,
 };
-
-const nexa = localFont({
-  src: "../public/fonts/nexa/Nexa-Heavy.ttf",
-  variable: "--font-nexa",
-});
 
 export default function RootLayout({
   children,
@@ -38,7 +35,13 @@ export default function RootLayout({
         />
       </Head>
       <html lang="en">
-        <body className={`${nexa.variable} inter.className`}>{children}</body>
+        <body
+          className={`${Nexa.variable} ${NexaBold.variable} inter.className`}
+        >
+          <Script src="/script.js" />
+          <Script src="/script2.js" />
+          {children}
+        </body>
       </html>
     </>
   );

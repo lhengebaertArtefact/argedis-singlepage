@@ -1,7 +1,8 @@
 import type { Config } from "tailwindcss";
-import { fontFamily } from "./app/fonts-typo/fonts-typo";
+
 
 const config: Config = {
+  
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -16,7 +17,9 @@ const config: Config = {
       rotate: {
         '23': '23deg',
       },
-      fontFamily: { "Nexa-ExtraLight": "--font-nexa" }
+      fontFamily: { 
+        nexa: "var(--font-nexa)",
+        nexaBold: "var(--font-nexaHeavy)" }
     },
   },
   plugins: [],

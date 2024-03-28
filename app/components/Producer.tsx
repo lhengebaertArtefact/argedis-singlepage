@@ -52,19 +52,13 @@ function Producer({
         ))}
       </ul>
       <div className="max-h-[500px] overflow-y-auto">
-        <p className="text-[40px] text-[#007AA3] mb-[64px]">{producer.name}</p>
-        <p className="text-[28px] ">{producer.description}</p>
+        <p className="text-[40px] text-[#007AA3] mb-[64px] font-nexaBold">
+          {producer.name}
+        </p>
+        <p className="text-[28px] font-nexa">{producer.description}</p>
       </div>
 
       <div className="fixed bottom-0 left-[48px] right-[48px] flex  mb-[110px] justify-between items-center text-white">
-        <motion.img
-          src={producer.distance}
-          alt="logo total"
-          className="fixed top-[380px] left-[450px] w-[80px]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, ease: "easeIn" }}
-        />
         <img
           src={gif_main.src}
           alt="hand to click"

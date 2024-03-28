@@ -2,12 +2,11 @@ import RegionMap from "./components/RegionMap";
 import { obj } from "../api/objetRegion";
 
 export default async function Home() {
-  // Finalement un seul call a été nécessaire prendre les deux langues
-
   return (
-    <div>
-      <RegionMap regions={obj} />
-    </div>
+    <div
+      className="
+    w-screen h-screen bg-black"
+    ></div>
   );
 }
 
