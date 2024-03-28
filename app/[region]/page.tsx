@@ -1,6 +1,18 @@
 import RegionMap from "../components/RegionMap";
 import { obj } from "@/api/objetRegion";
 
+export async function generateStaticParams() {
+  const staticParams: any[] = [];
+  const regions = obj;
+
+  for (const region of regions) {
+    const { uid } = region;
+
+    staticParams.push({ region: uid });
+  }
+  return staticParams;
+}
+
 export default async function Region({
   params,
 }: {
