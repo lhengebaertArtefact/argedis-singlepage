@@ -1,114 +1,185 @@
-// const fetchContentfulData = async (query: string): Promise<any> => {
+const fetchContentfulData = async (query: string): Promise<any> => {
 
-//     const res: any = await fetch(
-//       `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
+    const res: any = await fetch(
+      `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
   
-//       {
-//         method: "POST",
-//         headers: {
-//           'Authorization': `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ query }),
-//       }
-//     );
-//     const data = res.json();
-//     return data;
-//   };
+      {
+        method: "POST",
+        headers: {
+          'Authorization': `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query }),
+      }
+    );
+    const data = res.json();
+    return data;
+  };
   
-//   export const getAllPages = async (): Promise<any | null> => {
+  export const getAllRegions = async (): Promise<any | null> => {
   
-//     let query = ` {
-//       pageCollection {
-//         items {
-//           title
-//           sys {
-//             id
-//           }
-//           logo {
-//             url
-//           }
-//           cardContent {
-//             json
-//           }
-//           cardImage {
-//             url
-//           }
-//           producersRefCollection(limit: 10) {
-//             limit
-//             items {
-//               ... on Producer {
-//                 sys {
-//                   id
-//                 }
-//                 producer
-//                 buttonText
-//                 producerPhoto {
-//                   url
-//                 }
-//                 producerDescription {
-//                   json
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }`;
-//     const res = await fetchContentfulData(query);
-//     const pages: any = res.data.pageCollection.items || [];
+    let query = ` {
+        regCollection {
+          items {
+            regionName
+            sys {
+              id
+            }
+            uid
+            background {
+              url
+            }
+           
+            lottieMap
+            producersCollection(limit: 5) {
+                      limit
+              items {
+                ... on Prod {
+                  sys {
+                    id
+                  }
+                  producerName
+                  y
+                  x
+                  prodPhoto{
+                    url
+                  }
+                  mapProducer{
+                    url
+                  }
+                  descriptionProducer
+                  productsCollection(limit: 3) {
+                                  limit
+                    items {
+                      ... on Product {
+                        sys {
+                          id
+                        }
+                        productName
+                        productPhoto{
+                          url
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }`;
+    const res = await fetchContentfulData(query);
+    const regions: any = res.data.regCollection.items || [];
   
-//     // Si vous attendez une seule page, vous pouvez simplement retourner la première
-//     // page de la liste ou null si la liste est vide
-//     return pages;
-//   }
+    // Si vous attendez une seule page, vous pouvez simplement retourner la première
+    // page de la liste ou null si la liste est vide
+    return regions;
+  }
   
-//   export const getPage = async (locale: string): Promise<any | null> => {
-//     const transformLocale = locale === "fr" ? "fr" : "en-US"
-//     let query = ` {
-//       pageCollection(locale : "${transformLocale}") {
-//         items {
-//           title
-//           sys {
-//             id
-//           }
-//           logo {
-//             url
-//           }
-//           cardContent {
-//             json
-//           }
-//           cardImage {
-//             url
-//           }
-//           producersRefCollection(limit: 10) {
-//             limit
-//             items {
-//               ... on Producer {
-//                 sys {
-//                   id
-//                 }
-//                 producer
-//                 buttonText
-//                 producerPhoto {
-//                   url
-//                 }
-//                 producerDescription {
-//                   json
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }`;
-//     const res = await fetchContentfulData(query);
-//     const pages: any = res.data.pageCollection.items || [];
+ 
+  export const getAllRegionsLangs = async (): Promise<any | null> => {
+    let query = `{
+      fr: regCollection(locale: "fr") {
+        items {
+            regionName
+            sys {
+              id
+            }
+            uid
+            background {
+              url
+            }
+            
+            lottieMap
+            producersCollection(limit: 5) {
+                      limit
+              items {
+                ... on Prod {
+                  sys {
+                    id
+                  }
+                  producerName
+                  y
+                  x
+                  prodPhoto{
+                    url
+                  }
+                  mapProducer{
+                    url
+                  }
+                  descriptionProducer
+                  productsCollection(limit: 4) {
+                                  limit
+                    items {
+                      ... on Product {
+                        sys {
+                          id
+                        }
+                        productName
+                        productPhoto{
+                          url
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+      }
+      en: regCollection(locale: "en-US") {
+        items {
+            regionName
+            sys {
+              id
+            }
+            uid
+            background {
+              url
+            }
+            
+            lottieMap
+            producersCollection(limit: 5) {
+                      limit
+              items {
+                ... on Prod {
+                  sys {
+                    id
+                  }
+                  producerName
+                  y
+                  x
+                  prodPhoto{
+                    url
+                  }
+                  mapProducer{
+                    url
+                  }
+                  descriptionProducer
+                  productsCollection(limit: 3) {
+                                  limit
+                    items {
+                      ... on Product {
+                        sys {
+                          id
+                        }
+                        productName
+                        productPhoto{
+                          url
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+      }
+    }`;
   
-//     // Si vous attendez une seule page, vous pouvez simplement retourner la première
-//     // page de la liste ou null si la liste est vide
-//     return pages;
-//   }
+    const res = await fetchContentfulData(query);
+    return { fr: res.data.fr.items, en: res.data.en.items } || null;
+  }
   
 //   export const getAllRegionsId = async (slug: string): Promise<any | null> => {
 //     let query = `{
@@ -190,51 +261,7 @@
   
   
   
-//   export const getRegion = async (slug: any, locale: string): Promise<any | null> => {
   
-//     const transformLocale = locale === "fr" ? "fr" : "en-US"
-  
-//       let query = `{
-//         pageCollection(where: {sys: { id: "${slug}" } }, locale : "${transformLocale}") {
-//         items {
-//             sys {
-//               id
-//             }
-//             title
-//             logo {
-//               url
-//             }
-//             cardContent {
-//               json
-//             }
-//             cardImage {
-//               url
-//             }
-    
-//             producersRefCollection(limit: 10) {
-//               limit
-//               items {
-//                 ... on Producer {
-//                   sys {
-//                     id
-//                   }
-//                   producer
-//                   buttonText
-//                   producerPhoto {
-//                     url
-//                   }
-//                   producerDescription {
-//                     json
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }`;
-//       const res = await fetchContentfulData(query);
-//       return res.data.pageCollection.items[0] || null;
-//   }
   
 //   export const getAllProducerId = async (slug: any): Promise<any | null> => {
   

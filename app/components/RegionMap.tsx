@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Producer from "./Producer";
 import arrow_left from "../../public/arrow_left.png";
 import frenchFlag from "../../public/frenchFlag.png";
@@ -35,11 +35,14 @@ export default function RegionMap({ region }: any) {
     setShowProducer(false);
   };
 
-  // Fonction pour passer au fournisseur suivant
+  const currentRegion = region[currentLang];
+
   const nextProducer = () => {
     setCurrentProducerIndex((prevIndex) => {
       const nextIndex = prevIndex + 1;
-      return nextIndex < currentRegion.producers.length ? nextIndex : 0;
+      return nextIndex < currentRegion.producersCollection.items.length
+        ? nextIndex
+        : 0;
     });
     setShowProducer(true);
   };
@@ -47,25 +50,19 @@ export default function RegionMap({ region }: any) {
   const previousProducer = () => {
     setCurrentProducerIndex((prevIndex) => {
       const nextIndex = prevIndex - 1;
-      return nextIndex >= 0 ? nextIndex : currentRegion.producers.length - 1;
+      return nextIndex >= 0
+        ? nextIndex
+        : currentRegion.producersCollection.items.length - 1;
     });
     setShowProducer(true);
   };
 
-  const currentRegion = region.find(
-    (region: any) => region.lang === currentLang
-  );
-
-  useEffect(() => {}, [currentLang]);
-
-  useEffect(() => {
-    setCurrentProducerIndex(0);
-  }, [currentRegion, showProducer]);
+  const myLottie: any | undefined = currentRegion?.lottieMap;
 
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData: currentRegion.bigMap, // Chargement de l'animation depuis le fichier JSON
+    animationData: myLottie, // Chargement de l'animation depuis le fichier JSON
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
@@ -74,7 +71,11 @@ export default function RegionMap({ region }: any) {
   return (
     <div
       className={" bg-cover bg-center max-w-full h-screen"}
-      style={{ backgroundImage: `url(${currentRegion.backgroundMap})` }}
+      style={{
+        backgroundImage: currentRegion?.background
+          ? `url(${currentRegion?.background.url})`
+          : "none",
+      }}
     >
       <motion.div
         className="absolute top-[0px]"
@@ -107,7 +108,10 @@ export default function RegionMap({ region }: any) {
           ) : (
             <div>
               <img
-                src={currentRegion.producers[currentProducerIndex].map}
+                src={
+                  currentRegion.producersCollection.items[currentProducerIndex]
+                    .mapProducer.url
+                }
                 alt="small map of a region"
                 className="scale-[2] mt-[200px]"
                 onError={handleImageError}
@@ -203,25 +207,34 @@ export default function RegionMap({ region }: any) {
                     }
                   >
                     <Producer
-                      producer={currentRegion.producers[currentProducerIndex]}
+                      producer={
+                        currentRegion.producersCollection.items[
+                          currentProducerIndex
+                        ]
+                      }
                       previousProducer={
                         currentProducerIndex > 0
-                          ? currentRegion.producers[currentProducerIndex - 1]
-                          : currentRegion.producers[
-                              currentRegion.producers.length - 1
+                          ? currentRegion.producersCollection.items[
+                              currentProducerIndex - 1
+                            ]
+                          : currentRegion.producersCollection.items[
+                              currentRegion.producersCollection.items.length - 1
                             ]
                       }
                       nextProducer={
                         currentProducerIndex <
-                        currentRegion.producers.length - 1
-                          ? currentRegion.producers[currentProducerIndex + 1]
-                          : currentRegion.producers[0]
+                        currentRegion.producersCollection.items.length - 1
+                          ? currentRegion.producersCollection.items[
+                              currentProducerIndex + 1
+                            ]
+                          : currentRegion.producersCollection.items[0]
                       }
                       region={currentRegion}
                       onNextSupplier={nextProducer}
                       onPreviousSupplier={previousProducer}
                       onError={handleImageError}
                       imageError={imageError}
+                      currentLang={currentLang}
                     />
                     <div style={{ height: "100vh" }}></div>
                   </motion.div>
@@ -241,16 +254,18 @@ export default function RegionMap({ region }: any) {
                     </p>
                   </div>
 
-                  {currentRegion.producers.map(
+                  {currentRegion.producersCollection.items.map(
                     (producer: any, index: number) => (
                       <button
                         key={index}
                         className="absolute w-[300px] h-[50px] border-none rounded-full "
                         style={{
-                          top: producer.coordinates.y,
-                          left: producer.coordinates.x,
+                          top: producer.y,
+                          left: producer.x,
                         }}
-                        onClick={() => openOrClose(producer.uid, index)}
+                        onClick={() =>
+                          openOrClose(producer.producerName, index)
+                        }
                       >
                         {imageError ? (
                           <div className="w-full h-full bg-white"></div>
@@ -258,12 +273,16 @@ export default function RegionMap({ region }: any) {
                           <div className="relative">
                             <img
                               className="absolute w-[144px] top-[5px] z-[5]"
-                              src={producer.photo}
-                              alt={producer.name}
+                              src={producer.prodPhoto.url}
+                              alt={producer.producerName}
                               onError={handleImageError}
                             />
                             <motion.div
-                              className="absolute top-[-7px] left-[-7px] w-[160px] h-[160px] bg-white opacity-50 rounded-full"
+                              className="absolute top-[-4px] left-[-8px] w-[160px] h-[155px] bg-white opacity-50 "
+                              style={{
+                                borderRadius:
+                                  "55% 45% 45% 55% / 46% 42% 58% 54%",
+                              }}
                               initial={{ scale: 1 }}
                               animate={{ scale: [1, 1.1, 1] }}
                               transition={{
@@ -288,13 +307,6 @@ export default function RegionMap({ region }: any) {
     </div>
   );
 }
-
-//   <motion.div
-//   className="absolute top-0 left-0 w-[144px] h-[144px] rounded-full border-white border-solid border-opacity-50"
-//   initial={{ scale: 1 }}
-//   animate={{ scale: [1, 1.1, 1] }}
-//   transition={{ duration: 2, repeat: Infinity }}
-// ></motion.div>;
 
 // "use client";
 
