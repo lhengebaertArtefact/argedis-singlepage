@@ -67,15 +67,11 @@ export default function RegionMap({ region }: any) {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
-  // const backgroundImageUrl = currentRegion.background.url
-  //   ? `url(${currentRegion.background.url})`
-  //   : "none";
-  // console.log(currentRegion.background);
 
   return (
     <div
       className={" bg-cover bg-center max-w-full h-screen"}
-      style={{ backgroundImage: `url(${currentRegion.background.url})` }}
+      style={{ backgroundImage: `url(${currentRegion?.background.url})` }}
     >
       <motion.div
         className="absolute top-[0px]"
