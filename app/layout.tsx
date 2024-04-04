@@ -2,10 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
-import { useEffect } from "react";
-import local from "next/font/local";
-import localFont from "next/font/local";
-import { Nexa, NexaBold } from "./utils/customFonts";
+import { Nexa, NexaBold } from "../utils/customFonts";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });

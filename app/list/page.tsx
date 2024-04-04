@@ -1,5 +1,4 @@
-import { getAllRegions, getAllRegionsLangs } from "@/api/contentful";
-import { obj } from "@/api/objetRegion";
+import { getAllRegions } from "@/api/contentful";
 import Link from "next/link";
 
 export default async function List() {

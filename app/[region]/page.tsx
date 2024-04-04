@@ -1,4 +1,4 @@
-import RegionMap from "../components/RegionMap";
+import RegionMap from "../../components/RegionMap";
 import { getAllRegions, getAllRegionsLangs } from "@/api/contentful";
 
 export async function generateStaticParams() {

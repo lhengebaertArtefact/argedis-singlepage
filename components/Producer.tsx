@@ -1,11 +1,9 @@
 "use client";
-import React, { useEffect } from "react";
+
 import fond from "@/public/fond.png";
-import arrow_left from "../../public/arrow_left.png";
 import chevron_left from "../../public/chevron_left.png";
 import arrow_right from "../../public/arrow_right.png";
 import gif_main from "../../public/gif_main.gif";
-import { motion } from "framer-motion";
 
 function Producer({
   producer,
@@ -16,7 +14,6 @@ function Producer({
   nextProducer,
   onError,
   imageError,
-  showProducer,
   currentLang,
 }: any) {
   return (
@@ -114,17 +111,3 @@ function Producer({
 }
 
 export default Producer;
-
-// "use client";
-
-// function Producer({ producer, region }: any) {
-//   return (
-//     <div>
-//       <p>{producer.producer}</p>
-//       <p>{region.title}</p>
-//       <img src={region.logo.url} alt="carte region" />
-//     </div>
-//   );
-// }
-
-// export default Producer;
