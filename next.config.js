@@ -11,7 +11,6 @@ const withPWA = require("@ducanh2912/next-pwa").default({
     disableDevLogs: true,
   },
   cacheStartUrl: false,
-  trailingSlash: true,
 });
 
 const nextConfig = {};
