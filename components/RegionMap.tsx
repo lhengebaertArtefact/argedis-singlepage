@@ -1,13 +1,11 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import Producer from "./Producer";
-import arrow_left from "../../public/arrow_left.png";
-import frenchFlag from "../../public/frenchFlag.png";
-import englishFlag from "../../public/englishFlag.png";
-import map_big from "../../public/map_big.png";
-import logoTotal from "../../public/logoTotal.png";
+import arrow_left from "../public/arrow_left.png";
+import frenchFlag from "../public/frenchFlag.png";
+import englishFlag from "../public/englishFlag.png";
 import { motion } from "framer-motion";
-import { animate } from "popmotion";
+
 import Lottie from "react-lottie";
 
 export default function RegionMap({ region }: any) {

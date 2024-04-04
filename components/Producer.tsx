@@ -1,13 +1,12 @@
 "use client";
 
 import fond from "@/public/fond.png";
-import chevron_left from "../../public/chevron_left.png";
-import arrow_right from "../../public/arrow_right.png";
-import gif_main from "../../public/gif_main.gif";
+import chevron_left from "../public/chevron_left.png";
+import arrow_right from "../public/arrow_right.png";
+import gif_main from "../public/gif_main.gif";
 
 function Producer({
   producer,
-  region,
   onNextSupplier,
   onPreviousSupplier,
   previousProducer,
