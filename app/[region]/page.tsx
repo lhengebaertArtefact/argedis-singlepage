@@ -20,8 +20,12 @@ export default async function Region({ params }: { params: { region: any } }) {
   const regionUID = params.region;
   const regions = await getAllRegionsLangs();
 
-  const frRegion = regions.fr.find((region: any) => region.uid === regionUID);
-  const enRegion = regions.en.find((region: any) => region.uid === regionUID);
+  const frRegion = regions.fr.find(
+    (region: any) => region.regionName === regionUID
+  );
+  const enRegion = regions.en.find(
+    (region: any) => region.regionName === regionUID
+  );
 
   return (
     <div>
