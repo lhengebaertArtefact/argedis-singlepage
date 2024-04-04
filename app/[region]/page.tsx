@@ -6,20 +6,11 @@ export async function generateStaticParams() {
   const staticParams: any[] = [];
 
   for (const region of regions) {
-    for (const producer of region.producersCollection.items) {
-      staticParams.push([
-        {
-          region: region.regionName,
-          producer: producer.producerName,
-          fr: "fr",
-        },
-        {
-          region: region.regionName,
-          producer: producer.producerName,
-          en: "en",
-        },
-      ]);
-    }
+    staticParams.push([
+      {
+        region: region.regionName,
+      },
+    ]);
   }
 
   return staticParams.flat();
