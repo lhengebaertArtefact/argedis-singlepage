@@ -4,6 +4,7 @@ import "./globals.css";
 import Head from "next/head";
 import { Nexa, NexaBold } from "../utils/customFonts";
 import Script from "next/script";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +35,7 @@ export default function RootLayout({
       <html lang="en">
         <body
           className={`${Nexa.variable} ${NexaBold.variable} inter.className`}
+          id="app-container"
         >
           <Script src="/script.js" />
           <Script src="/script2.js" />
