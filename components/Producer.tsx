@@ -30,7 +30,7 @@ function Producer({
           classProducer={producerMainPhoto}
         />
       )}
-      <ul className="fixed top-[700px] right-[121px] flex">
+      <ul className="fixed top-[700px] left-[400px] flex">
         {producer.productsCollection.items.map(
           (product: any, index: number) => (
             <li key={index}>
@@ -67,7 +67,9 @@ function Producer({
           <br />
           {producer.producerName2 && producer.producerName2}
         </p>
-        <p className="text-[28px] font-nexa">{producer.descriptionProducer}</p>
+        <p className="text-[28px] font-normal font-nexa">
+          {producer.descriptionProducer}
+        </p>
       </div>
 
       <div className="fixed bottom-0 left-[48px] right-[48px] flex  mb-[110px] justify-between items-center text-white">
@@ -77,7 +79,7 @@ function Producer({
           className="absolute transform -rotate-23 right-8 top-8"
         />
         <button
-          className="flex justify-between items-center rounded-[40px] bg-blanc h-[116px] text-[28px] px-[32px] text-black"
+          className="flex justify-between items-center rounded-[40px] bg-blanc h-[116px] text-[28px] px-[32px] text-black font-bold"
           onClick={onPreviousSupplier}
         >
           <svg
@@ -94,7 +96,7 @@ function Producer({
               fill={hexapinpointcolor}
             />
           </svg>
-          {currentLang === "fr" ? "fournisseur précédent" : "previous producer"}
+          {currentLang === "fr" ? "Fournisseur précédent" : "Previous producer"}
 
           <PhotoProducer
             producerPhoto={previousProducer.prodPhoto.url}
@@ -103,7 +105,7 @@ function Producer({
           />
         </button>
         <button
-          className="flex justify-between items-center rounded-[40px] bg-blanc h-[116px] text-[28px] px-[32px] text-black"
+          className="flex justify-between items-center rounded-[40px] bg-blanc h-[116px] text-[28px] px-[32px] text-black font-bold"
           onClick={onNextSupplier}
         >
           <PhotoProducer
@@ -111,7 +113,7 @@ function Producer({
             classProducer={producerPhotoButtonRight}
             colorBorder={hexapinpointcolor}
           />
-          {currentLang === "fr" ? "fournisseur suivant" : "next producer"}
+          {currentLang === "fr" ? "Fournisseur suivant" : "Next producer"}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="21"

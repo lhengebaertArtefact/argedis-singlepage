@@ -95,8 +95,8 @@ export default function RegionMap({ region }: any) {
       </motion.div>
       {toggle && (
         <motion.div
-          className="absolute top-[-195px]"
-          initial={{ opacity: 0, scale: 0.5 }}
+          className="absolute top-[5px] left-[-15px]"
+          initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
@@ -110,7 +110,7 @@ export default function RegionMap({ region }: any) {
                     .mapProducer.url
                 }
                 alt="small map of a region"
-                className="scale-[2] mt-[200px]"
+                className=" mt-[200px]"
                 onError={handleImageError}
               />
             </div>
