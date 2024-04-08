@@ -161,7 +161,7 @@ export default function RegionMap({ region }: any) {
                 <div>
                   <div className="absolute top-[84px] left-[48px] flex z-[10]">
                     <div
-                      className="rounded-full bg-[#D4673D] w-[82px] h-[82px] flex justify-center items-center mr-[25px] cursor-pointer"
+                      className="rounded-full bg-blanc w-[82px] h-[82px] flex justify-center items-center mr-[25px] cursor-pointer"
                       onClick={() => openOrClose(null, 0)}
                     >
                       {imageError ? (
@@ -240,7 +240,6 @@ export default function RegionMap({ region }: any) {
                       onError={handleImageError}
                       imageError={imageError}
                       currentLang={currentLang}
-                      pinpointColor={currentRegion.pinpointColor}
                       colorbackground={currentRegion.colorbackground}
                       hexapinpointcolor={currentRegion.hexapinpointcolor}
                     />

@@ -1,10 +1,7 @@
 "use client";
 
 import fond from "@/public/fond.png";
-import chevron_left from "../public/chevron_left.png";
-import arrow_right from "../public/arrow_right.png";
 import gif_main from "../public/gif_main.gif";
-import chevronBoutonRight from "../public/chevronBoutonRight.svg";
 import PhotoProducer from "./PhotoProducer";
 
 function Producer({
@@ -16,25 +13,21 @@ function Producer({
   onError,
   imageError,
   currentLang,
-  pinpointColor,
   colorbackground,
   hexapinpointcolor,
 }: any) {
   const producerPhotoButtonLeft = "w-[51px] ml-[24px]";
   const producerPhotoButtonRight = "w-[51px] mr-[24px]";
-
-  console.log(colorbackground);
+  const producerMainPhoto = "fixed top-[655px] left-[68px] w-[289px]";
 
   return (
-    <div className="absolute z-1 rounded-[40px] bg-white top-[834px] left-[48px] right-[48px] px-[68px] pt-[126px] px-[68px] py-[68px] z-[1]">
+    <div className="absolute z-1 rounded-[40px] bg-blanc top-[834px] left-[48px] right-[48px] px-[68px] pt-[126px] px-[68px] py-[68px] z-[1]">
       {imageError ? (
         <div className="w-full h-full bg-white"></div>
       ) : (
-        <img
-          className="fixed top-[655px] left-[68px] w-[289px]"
-          src={producer.prodPhoto.url}
-          alt={producer.producerName}
-          onError={onError}
+        <PhotoProducer
+          producerPhoto={producer.prodPhoto.url}
+          classProducer={producerMainPhoto}
         />
       )}
       <ul className="fixed top-[700px] right-[121px] flex">
@@ -66,7 +59,8 @@ function Producer({
       </ul>
       <div className="max-h-[500px] overflow-y-auto">
         <p
-          className={`text-[40px] text-${colorbackground}  mb-[64px] font-nexaBold`}
+          className={`text-[40px] mb-[64px] font-nexaBold`}
+          style={{ color: colorbackground }}
         >
           {" "}
           {producer.producerName}
@@ -81,7 +75,7 @@ function Producer({
           className="absolute transform -rotate-23 right-8 top-8"
         />
         <button
-          className="flex justify-between items-center rounded-[40px] bg-[#D4673D] h-[116px] text-[28px] px-[32px]"
+          className="flex justify-between items-center rounded-[40px] bg-blanc h-[116px] text-[28px] px-[32px] text-black"
           onClick={onPreviousSupplier}
         >
           <svg
@@ -107,7 +101,7 @@ function Producer({
           />
         </button>
         <button
-          className="flex justify-between items-center rounded-[40px] bg-[#D4673D] h-[116px] text-[28px] px-[32px]"
+          className="flex justify-between items-center rounded-[40px] bg-blanc h-[116px] text-[28px] px-[32px] text-black"
           onClick={onNextSupplier}
         >
           <PhotoProducer

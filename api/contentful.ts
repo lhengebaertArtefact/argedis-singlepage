@@ -29,7 +29,6 @@ const fetchContentfulData = async (query: string): Promise<any> => {
             background {
               url
             }
-           pinpointColor
            colorbackground
            hexapinpointcolor
             lottieMap
@@ -41,6 +40,7 @@ const fetchContentfulData = async (query: string): Promise<any> => {
                     id
                   }
                   producerName
+                  producerName2
                   y
                   x
                   prodPhoto{
@@ -91,7 +91,6 @@ const fetchContentfulData = async (query: string): Promise<any> => {
             background {
               url
             }
-            pinpointColor
             colorbackground
             hexapinpointcolor
             lottieMap
@@ -103,6 +102,7 @@ const fetchContentfulData = async (query: string): Promise<any> => {
                     id
                   }
                   producerName
+                  producerName2
                   y
                   x
                   prodPhoto{
@@ -141,7 +141,7 @@ const fetchContentfulData = async (query: string): Promise<any> => {
             background {
               url
             }
-            pinpointColor
+
             colorbackground
             hexapinpointcolor
             lottieMap
@@ -153,6 +153,7 @@ const fetchContentfulData = async (query: string): Promise<any> => {
                     id
                   }
                   producerName
+                  producerName2
                   y
                   x
                   prodPhoto{
@@ -187,166 +188,7 @@ const fetchContentfulData = async (query: string): Promise<any> => {
     return { fr: res.data.fr.items, en: res.data.en.items } || null;
   }
   
-//   export const getAllRegionsId = async (slug: string): Promise<any | null> => {
-//     let query = `{
-//       fr: pageCollection(where: {sys: { id: "${slug}" } }, locale: "fr") {
-//         items {
-//           sys {
-//             id
-//           }
-//           title
-//           logo {
-//             url
-//           }
-//           cardContent {
-//             json
-//           }
-//           cardImage {
-//             url
-//           }
-//           producersRefCollection(limit: 10) {
-//             limit
-//             items {
-//               ... on Producer {
-//                 sys {
-//                   id
-//                 }
-//                 producer
-//                 buttonText
-//                 producerPhoto {
-//                   url
-//                 }
-//                 producerDescription {
-//                   json
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//       en: pageCollection(where: {sys: { id: "${slug}" } }, locale: "en-US") {
-//         items {
-//           sys {
-//             id
-//           }
-//           title
-//           logo {
-//             url
-//           }
-//           cardContent {
-//             json
-//           }
-//           cardImage {
-//             url
-//           }
-//           producersRefCollection(limit: 10) {
-//             limit
-//             items {
-//               ... on Producer {
-//                 sys {
-//                   id
-//                 }
-//                 producer
-//                 buttonText
-//                 producerPhoto {
-//                   url
-//                 }
-//                 producerDescription {
-//                   json
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }`;
-  
-//     const res = await fetchContentfulData(query);
-//     return { fr: res.data.fr.items, en: res.data.en.items } || null;
-//   }
-  
-  
-  
-  
-  
-//   export const getAllProducerId = async (slug: any): Promise<any | null> => {
-  
-//     let query = `{
-//       producerCollection(where : { sys : { id: "${slug}"}}) {
-//         items {
-//           sys {
-//             id
-//           }
-//           producer
-//           producerPhoto {
-//             url
-//           }
-//           producerDescription{
-//             json
-//           }
-//         }
-//       }
-//     }`;
-  
-//     const res = await fetchContentfulData(query);
-//     const producer: any | null = res.data.producerCollection?.items.map((element : any) => element.sys.id)
-  
-//     return producer;
-//   };
-  
-//   export const getAllProducersNames = async (): Promise<any | null> => {
-  
-//     let query = `{
-//       producerCollection {
-//         items {
-//           sys {
-//             id
-//           }
-//           producer
-//           producerPhoto {
-//             url
-//           }
-//           producerDescription{
-//             json
-//           }
-//         }
-//       }
-//     }`;
-  
-//     const res = await fetchContentfulData(query);
-//     const producer: any | null = res.data.producerCollection?.items.map((element: any) => element.producer)
-  
-//     return producer;
-//   };
-  
-//   export const getProducerName = async (slug: any, locale: string): Promise<any | null> => {
-  
-//     const transformLocale = locale === "fr" ? "fr" : "en-US"
-  
-//     let query = `{
-//       producerCollection(where : { sys : { id: "${slug}"}}, locale: "${transformLocale}") {
-//       items {
-//         sys {
-//             id
-//           }
-//           producer
-//           producerPhoto {
-//             url
-//           }
-//           producerDescription{
-//             json
-//           }
-//         }
-//       }
-//     }`;
-  
-//     const res = await fetchContentfulData(query);
-//     const producer: any | null = res.data.producerCollection?.items[0] || null
-  
-//     return producer;
-//   };
-  
-  
+
   
   
   
