@@ -64,6 +64,8 @@ function Producer({
         >
           {" "}
           {producer.producerName}
+          <br />
+          {producer.producerName2 && producer.producerName2}
         </p>
         <p className="text-[28px] font-nexa">{producer.descriptionProducer}</p>
       </div>
