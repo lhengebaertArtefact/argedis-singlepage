@@ -7,6 +7,7 @@ import englishFlag from "../public/englishFlag.png";
 import { motion } from "framer-motion";
 
 import Lottie from "react-lottie";
+import PhotoProducer from "./PhotoProducer";
 
 export default function RegionMap({ region }: any) {
   const [currentLang, setCurrentLang] = useState<string>("fr");
@@ -65,6 +66,8 @@ export default function RegionMap({ region }: any) {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
+  const producerPhotoOnMap = "absolute w-[144px] top-[5px] z-[5]";
 
   return (
     <div
@@ -164,12 +167,20 @@ export default function RegionMap({ region }: any) {
                       {imageError ? (
                         <div className="w-full h-full bg-white"></div>
                       ) : (
-                        <img
-                          src={arrow_left.src}
-                          className="h-[42px] z-[5]"
-                          alt="arrow left"
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="25"
+                          height="43"
+                          viewBox="0 0 25 43"
+                          fill="none"
+                          className=""
                           onError={handleImageError}
-                        />
+                        >
+                          <path
+                            d="M0.9375 21.6879C0.9375 22.5066 1.24019 23.205 1.86886 23.8311L20.0304 42.2051C20.5194 42.7349 21.1713 42.9998 21.9164 42.9998C23.4299 42.9998 24.6174 41.7957 24.6174 40.2063C24.6174 39.4357 24.3147 38.7374 23.8024 38.2076L7.43375 21.6879L23.8024 5.16814C24.3147 4.61427 24.6174 3.91592 24.6174 3.14532C24.6174 1.58004 23.4299 0.375977 21.9164 0.375977C21.1713 0.375977 20.5194 0.64087 20.0304 1.17066L1.86886 19.5446C1.24019 20.1708 0.960784 20.8691 0.9375 21.6879Z"
+                            fill={currentRegion.hexapinpointcolor}
+                          />
+                        </svg>
                       )}
                     </div>
                     <button
@@ -229,6 +240,9 @@ export default function RegionMap({ region }: any) {
                       onError={handleImageError}
                       imageError={imageError}
                       currentLang={currentLang}
+                      pinpointColor={currentRegion.pinpointColor}
+                      colorbackground={currentRegion.colorbackground}
+                      hexapinpointcolor={currentRegion.hexapinpointcolor}
                     />
                     <div style={{ height: "100vh" }}></div>
                   </motion.div>
@@ -265,12 +279,11 @@ export default function RegionMap({ region }: any) {
                           <div className="w-full h-full bg-white"></div>
                         ) : (
                           <div className="relative">
-                            <img
-                              className="absolute w-[144px] top-[5px] z-[5]"
-                              src={producer.prodPhoto.url}
-                              alt={producer.producerName}
-                              onError={handleImageError}
+                            <PhotoProducer
+                              producerPhoto={producer.prodPhoto.url}
+                              classProducer={producerPhotoOnMap}
                             />
+
                             <motion.div
                               className="absolute top-[-4px] left-[-8px] w-[160px] h-[155px] bg-white opacity-50 "
                               style={{

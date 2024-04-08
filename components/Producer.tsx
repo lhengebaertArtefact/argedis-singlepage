@@ -4,6 +4,8 @@ import fond from "@/public/fond.png";
 import chevron_left from "../public/chevron_left.png";
 import arrow_right from "../public/arrow_right.png";
 import gif_main from "../public/gif_main.gif";
+import chevronBoutonRight from "../public/chevronBoutonRight.svg";
+import PhotoProducer from "./PhotoProducer";
 
 function Producer({
   producer,
@@ -14,7 +16,15 @@ function Producer({
   onError,
   imageError,
   currentLang,
+  pinpointColor,
+  colorbackground,
+  hexapinpointcolor,
 }: any) {
+  const producerPhotoButtonLeft = "w-[51px] ml-[24px]";
+  const producerPhotoButtonRight = "w-[51px] mr-[24px]";
+
+  console.log(colorbackground);
+
   return (
     <div className="absolute z-1 rounded-[40px] bg-white top-[834px] left-[48px] right-[48px] px-[68px] pt-[126px] px-[68px] py-[68px] z-[1]">
       {imageError ? (
@@ -55,7 +65,10 @@ function Producer({
         )}
       </ul>
       <div className="max-h-[500px] overflow-y-auto">
-        <p className="text-[40px] text-[#007AA3] mb-[64px] font-nexaBold">
+        <p
+          className={`text-[40px] text-${colorbackground}  mb-[64px] font-nexaBold`}
+        >
+          {" "}
           {producer.producerName}
         </p>
         <p className="text-[28px] font-nexa">{producer.descriptionProducer}</p>
@@ -71,38 +84,52 @@ function Producer({
           className="flex justify-between items-center rounded-[40px] bg-[#D4673D] h-[116px] text-[28px] px-[32px]"
           onClick={onPreviousSupplier}
         >
-          <img
-            src={chevron_left.src}
-            alt="arrow left"
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="30"
+            viewBox="0 0 21 30"
+            fill="none"
             className="mr-[43px]"
             onError={onError}
-          />
+          >
+            <path
+              d="M-3.27628e-06 15C-3.40214e-06 14.4237 0.268433 13.9322 0.825955 13.4915L16.9321 0.559317C17.3658 0.186436 17.9439 -3.13742e-06 18.6047 -3.25295e-06C19.9469 -3.48763e-06 21 0.847452 21 1.9661C21 2.50847 20.7316 3 20.2773 3.37288L5.76106 15L20.2773 26.6271C20.7316 27.0169 21 27.5085 21 28.0508C21 29.1525 19.9469 30 18.6047 30C17.944 30 17.3658 29.8136 16.9322 29.4407L0.825956 16.5085C0.268434 16.0678 0.0206458 15.5763 -3.27628e-06 15Z"
+              fill={hexapinpointcolor}
+            />
+          </svg>
           {currentLang === "fr" ? "fournisseur précédent" : "previous producer"}
 
-          <img
-            className="w-[51px] ml-[24px]"
-            src={previousProducer.prodPhoto.url}
-            alt={producer.name}
-            onError={onError}
+          <PhotoProducer
+            producerPhoto={previousProducer.prodPhoto.url}
+            classProducer={producerPhotoButtonLeft}
+            colorBorder={hexapinpointcolor}
           />
         </button>
         <button
           className="flex justify-between items-center rounded-[40px] bg-[#D4673D] h-[116px] text-[28px] px-[32px]"
           onClick={onNextSupplier}
         >
-          <img
-            className="w-[51px] mr-[24px]"
-            src={nextProducer.prodPhoto.url}
-            alt={producer.producerName}
-            onError={onError}
+          <PhotoProducer
+            producerPhoto={nextProducer.prodPhoto.url}
+            classProducer={producerPhotoButtonRight}
+            colorBorder={hexapinpointcolor}
           />
           {currentLang === "fr" ? "fournisseur suivant" : "next producer"}
-          <img
-            src={arrow_right.src}
-            className="ml-[43px]"
-            alt="arrow right"
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="30"
+            viewBox="0 0 21 30"
+            fill="none"
+            className={`ml-[43px]`}
             onError={onError}
-          />
+          >
+            <path
+              d="M21 15C21 15.5763 20.7316 16.0678 20.174 16.5085L4.06784 29.4407C3.63422 29.8136 3.05604 30 2.39528 30C1.05309 30 -3.18569e-06 29.1525 -3.13663e-06 28.0339C-3.11285e-06 27.4915 0.268433 27 0.72271 26.6271L15.2389 15L0.722711 3.37288C0.268434 2.98305 -2.0166e-06 2.49152 -1.99282e-06 1.94915C-1.94451e-06 0.847456 1.05309 -1.74381e-06 2.39528 -1.62648e-06C3.05605 -1.56871e-06 3.63422 0.186439 4.06784 0.559321L20.174 13.4915C20.7316 13.9322 20.9794 14.4237 21 15Z"
+              fill={hexapinpointcolor}
+            />
+          </svg>
         </button>
       </div>
     </div>

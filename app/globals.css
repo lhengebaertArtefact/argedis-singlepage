@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-  
+
+:root {
+    --jaune-Sud-Est: #FBBA00;
+    --violetbourgogne: #55478C;
+    --vert-Rhne-Alpes: #008B76;
+}
   
   
 

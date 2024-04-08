@@ -29,7 +29,9 @@ const fetchContentfulData = async (query: string): Promise<any> => {
             background {
               url
             }
-           
+           pinpointColor
+           colorbackground
+           hexapinpointcolor
             lottieMap
             producersCollection(limit: 5) {
                       limit
@@ -89,7 +91,9 @@ const fetchContentfulData = async (query: string): Promise<any> => {
             background {
               url
             }
-            
+            pinpointColor
+            colorbackground
+            hexapinpointcolor
             lottieMap
             producersCollection(limit: 5) {
                       limit
@@ -137,7 +141,9 @@ const fetchContentfulData = async (query: string): Promise<any> => {
             background {
               url
             }
-            
+            pinpointColor
+            colorbackground
+            hexapinpointcolor
             lottieMap
             producersCollection(limit: 5) {
                       limit

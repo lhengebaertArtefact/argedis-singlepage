@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { colors } from "./color/colors";
 
 
 const config: Config = {
@@ -19,7 +20,8 @@ const config: Config = {
       },
       fontFamily: { 
         nexa: "var(--font-nexa)",
-        nexaBold: "var(--font-nexaHeavy)" }
+        nexaBold: "var(--font-nexaHeavy)" },
+        colors
     },
   },
   plugins: [],
