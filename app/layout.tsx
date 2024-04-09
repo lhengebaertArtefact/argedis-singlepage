@@ -4,7 +4,6 @@ import "./globals.css";
 import Head from "next/head";
 import { Nexa, NexaBold } from "../utils/customFonts";
 import Script from "next/script";
-import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
